@@ -44,6 +44,9 @@ Bisecting the GL state showed `GL_DEPTH_BOUNDS_TEST_EXT` still enabled after the
 matching `glPopAttrib`. A standalone 30-line push, enable, pop test reproduces it
 on the driver for `GL_ENABLE_BIT`, `GL_DEPTH_BUFFER_BIT` and `GL_ALL_ATTRIB_BITS`.
 
+# The issue has been reported to AMD
+If a future driver fixes glPopAttrib, the proxy can stay installed: it only restores the state a correct driver already restores, so it becomes a harmless no-op.
+
 ## Fix
 
 `glfix/` builds a proxy `opengl32.dll`. All 368 exports forward to the system
